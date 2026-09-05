@@ -1,0 +1,43 @@
+<div>
+    <h2>Cart detail</h2>
+    {% if not cart.cart %}
+        <div>Cart is empty</div>
+
+    {% else %}
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                        <tr>
+                            <td>{{item.book.title}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.total_price}}</td>
+                            <td>
+                                <a href="{% url 'payment:cart_remove' item.book.id %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><strong>Order total:</strong></td>
+                        <td><strong>{{ total_price }}:</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div>
+                <a href="{% url 'payment:order_create' %}">Order</a>
+            </div>
+        </div>
+    {% endif %}
+    <div><a href="{% url 'book_list' %}">Go back to the list</a></div>
+</div>

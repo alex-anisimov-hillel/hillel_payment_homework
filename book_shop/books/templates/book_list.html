@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div>
+        <a href="{% url 'payment:cart_detail' %}">View cart</a>
+        {% for book in books %}
+        <div>
+            <p>Name: {{book.title}}</p>
+            <p>Price: {{book.price}}</p>
+            <p>In Stock: {{book.stock}}</p>
+        </div>
+        <div>
+            <form action="{% url 'payment:cart_add' book.id %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="1" min="1">
+                <button type="submit">Add to cart</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

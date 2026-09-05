@@ -1,0 +1,14 @@
+<div>
+    <div>
+        <h2>Order confirmation</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div>
+                <h5>Total amount: <strong>{{total_price}}</strong></h5>
+            </div>
+            <button type="submit">Confirm</button>
+        </form>
+        <a href="{% url 'payment:cart_detail' %}">Back to cart</a>
+    </div>
+</div>
